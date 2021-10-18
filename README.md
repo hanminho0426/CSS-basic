@@ -189,6 +189,7 @@ div {
   ```
 
 - 2.복합 선택자
+
   - 1-1 일치 선택자(Basic Combinator)
     - 선택자 ABC와 XYZ를 <u>동시에 만족</u>하는 요소 선택.
 
@@ -208,7 +209,8 @@ div {
 ```
 
 - 2.복합 선택자
-  - 1-1 자식 선택자(Child Cmbinator)
+
+  - 1-2 자식 선택자(Child Cmbinator)
     - 선택자 ABC의 <u>자식</u> 요소 XYZ 선택.
 
 ```html
@@ -224,4 +226,148 @@ div {
 </div>
 
 자식선택자 예시 ul> .orange { color: red; }
+```
+
+- 2.복합 선택자
+
+  - 1-3 하위(후손) 선택자(Descendant Cmbinator)
+    - 선택자 ABC의 <u>하위(후손)</u> 요소 XYZ 선택.
+    - '띄어쓰기'가 선택자의 기호!
+
+```html
+<div>
+  <ul>
+    <li>사과</li>
+    <li>딸기</li>
+    <li class="orange">오렌지</li>
+  </ul>
+  <div>당근</div>
+  <p>토마토</p>
+  <span class="orange">오렌지</span>
+</div>
+<span class="orange">오렌지</span>
+
+하위 선택자 예시 div .orange {color: red;}
+```
+
+- 2.복합 선택자
+
+  - 1-4 인접(형제) 선택자(Adjacent Sibilng Cmbinator)
+    - 선택자 ABC의 다음 형제 요소 XYZ <u>하나</u>를 선택.
+
+클래스 오렌지의 제외한 다음 선택자인 망고 하나에 CSS가 지정된다.
+
+```html
+<ul>
+  <li>딸기</li>
+  <li>수박</li>
+  <li class="orange">오렌지</li>
+  <li>망고</li>
+  <li>사과</li>
+</ul>
+
+인접 선택자 예시 .orange + li { color: red;}
+```
+
+- 2.복합 선택자
+
+  - 1-5 일반(형제) 선택자(General Sibilng Cmbinator)
+    - 선택자 ABC의 다음 형제 요소 XYZ <u>모두</u>를 선택.
+
+클래스 오렌지 제외한 다음 요소 모두에 적용된다
+
+```html
+<ul>
+  <li>딸기</li>
+  <li>수박</li>
+  <li class="orange">오렌지</li>
+  <li>망고</li>
+  <li>사과</li>
+</ul>
+
+일반 선택자 예시 .orange ~ li { color: red;}
+```
+
+- 3.가상 클래스 선택자(Pseudo-Classes)
+
+  - 모든 가상 클래스 선택자는 앞에 " : " 이 붙는다.
+
+  - 1-1 HOVER
+    - 선택자 ABC요소에 <u>마우스 커서가 올라가 있는 동안</u>를 선택.
+
+  ```css
+  <a href="www.naver.com">NAVER</a>
+
+  a {
+    color: blue;
+  }
+
+  a:hover {
+    color: red;
+  }
+
+  a에 마우스 커서가 올라가면 파랑에서 빨강으로 바뀐다.
+  ```
+
+- 3.가상 클래스 선택자(Pseudo-Classes)
+
+  - 1-2 ACTIVE
+    - 선택자 ABC요소에 <u>마우스를 클릭하고 있는 동안</u> 선택.
+
+  ```css
+  <a href="www.naver.com">NAVER</a>
+
+  a {
+    color: blue;
+  }
+
+  a:active {
+    color: red;
+  }
+
+  a에 마우스가 클릭되는 동안 파랑에서 빨강으로 바뀐다.
+  ```
+
+- 3.가상 클래스 선택자(Pseudo-Classes)
+
+  - 1-3 FOCUS
+    - 선택자 ABC요소가 <u>포커스되면</u> 선택.
+      - Focus가 될 수 있는 요소는 <u>HTML 대화형 콘텐츠</u>가 해당한다.
+      - <u>INPUT,A,BUTTON,LABEL,SELECT</u> 등 여러 요소가 있다.
+      - HTML 대화형 콘텐츠 요소가 아니더라도, <u>tabindex</u> 속성을 사용한 요소도 Focus가 될 수 있다.
+
+  ```css
+  <input type="text" />
+
+  input:focus {
+    background-color: orange;
+  }
+
+   마우스가 텍스트창에 포커스 되는 순간 동작된다.
+  ```
+
+  - Focus의 tabindex
+    - tabindex
+      - <u>tabindex</u>속성을 통해 Focus가 될 수 있는 요소를 만들 수 있다.
+      - 이름에도 알 수 있듯이 Tab키를 사용해 Focos 할 수 있는 순서를 지정하는 속성이다.
+      - 순서(값)로 <u>-1</u>이 아닌 다른 값을 넣는 것은 논리적 흐름을 방해하기 때문에 권장하지 않는다.
+
+```html
+<div class="box" tabindex="-1"></div>
+```
+
+```css
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  transition: 1s;
+}
+
+.box:focus {
+  width: 300px;
+  background-color: red;
+}
+
+focus가 적용되지 않던 div에 tabindex를 통해서 가능하게 만든다.
 ```
