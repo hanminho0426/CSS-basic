@@ -1,0 +1,7 @@
+/* @import 방식 */
+@import url(./box.css);
+
+div {
+  color: red;
+  font-size: 200px;
+}
