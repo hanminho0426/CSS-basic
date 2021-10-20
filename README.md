@@ -587,3 +587,123 @@ class box의 뒤에 가상의 요소가 만들어지고, "Content! 뒤!"로 출�
 
 "type이 password"인 속성에 적용된다.
 ```
+
+## 스타일 상속
+
+```css
+.animal {
+  color: red;
+}
+```
+
+```html
+<div class="ecosystem">
+  생태계
+  <div class="animal">
+    동물
+    <div class="tiger">호랑이</div>
+    <div class="lion">사자</div>
+    <div class="elephant">코끼리</div>
+  </div>
+  <div class="plant">식물</div>
+</div>
+
+.animal을 하단에 있는 호랑이~코끼리도 같은 그룹안에 있기 때문에 상속받는다.
+```
+
+- 상속되는 CSS 속성들..
+  - 모두 글자/문자 관련 속성들!(모든 글자/문자 속성은 아님 주의!)
+  - font-style: 글자 기울기
+  - font-weight: 글자 두께
+  - font-size: 글자 크기
+  - line-height: 줄 높이
+  - font-family: 폰트(서체)
+  - color: 글자 색상
+  - text-align: 정렬
+
+## 강제 상속 inherit
+
+```css
+.parent {
+  width: 300px;
+  height: 200px;
+  background-color: red;
+}
+.child {
+  width: 100px;
+  height: inherit; /*강제상속*/
+  background-color: inherit;
+  position: fixed;
+  top: 100px;
+  right: 10px;
+}
+```
+
+```html
+<div class="parent">
+  <div class="child"></div>
+</div>
+```
+
+## 선택자 우선순위
+
+- 우선순위란, 같은 요소가 여러 선언의 대상이 된 경우,
+  어떤 선언의 CSS 속성을 적용할지 결정하는 방법
+
+1. 점수가 높은 선언이 우선함!
+2. 점수가 같으면, 가장 마지막에 해석된 선언이 우선함!
+
+- 용어는 중요하진 않지만, CSS 우선순위의 점수를 계산하는 것을 "명시도"라고 부른다.
+- 용어는 중요하진 않지만, "!importent" 키워드를 사용하는 것을 "중요도"라고 부른다.
+- "선언순서(코드가 해석된 순서)"에 따라 우선한다고 표현한다.
+
+```css
+div {
+  color: red !important; /*!important-9999999점*/
+}
+#color_yellow {
+  color: yellow; /*ID선택자-100점*/
+}
+.color_green {
+  color: green; /*Class선택자-10점*/
+}
+div {
+  color: blue; /*div 태그 선택자-1점*/
+}
+* {
+  color: darkblue; /*전체선택자-0점*/
+}
+body {
+  color: violet; /*상속-X*/
+}
+```
+
+```html
+<div id="color_yellow" class="color_green" style="color:orange;">
+  <!--style 인라인 선언 - 1000점-->
+  Hello World!
+</div>
+```
+
+```css
+/*우선순위 점수매기기*/
+.list li.item { /*21점*/
+  color: red;
+}
+.list li:hover { /*21점*/
+  color: red;
+}
+.box::before { /*11점*/
+  content: "good";
+  color: red;
+}
+#submit span { /*101점*/
+  color: red;
+}
+header .mene li:nth-child(2) { /*22점*/
+  color: red;
+}
+h1 { color: red; } /*1점*/
+:not(.box){ color: red; } /*10점*/
+}
+```
